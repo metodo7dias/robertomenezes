@@ -149,7 +149,7 @@ function field(id,l,ph){var o=OPT[id];if(!o)return '<div><label for="o_'+id+'">'
 function segHtml(){var vid=S.mode==="video";return '<div class="seg"><button data-a="mode" data-v="imagem" class="'+(!vid?"on":"")+'">Imagem</button><button data-a="mode" data-v="video" class="'+(vid?"on":"")+'">Vídeo</button></div>'}
 function catList(tiles){return '<div class="cats'+(tiles?' tiles':'')+'">'+CATS.map(function(c){return '<button class="cat '+(!tiles&&S.cat===c[0]?"on":"")+'" data-a="cat" data-v="'+c[0]+'"><em>'+c[1]+'</em><div><b>'+c[2]+'</b><span>'+c[3]+'</span></div></button>'}).join("")+'</div>'}
 function fixo(p){var o=p.opcoes,L=[],t=p.modo==="video"?"vídeo":"imagem";if(S.human)L.push("Mostrar poros, pelos, linhas faciais, pequenas espinhas e pequenas manchas de pele, de forma natural.");L.push((o.sardas==="com sardas"?"Sem aspecto cinematográfico":"Sem sardas, sem aspecto cinematográfico")+", sem brilho, sem saturação, sem contraste forçado; apenas a iluminação do ambiente, sem luz de estúdio.");var q=o.qualidade||o.camera;L.push(q?"Qualidade e resolução de "+t+" de "+q+(/iPhone/.test(q)?" (Shot on "+q+")":"")+".":"Qualidade e resolução de "+t+" de iPhone 17 (Shot on iPhone 17).");var x=getSuf();if(x)L.push(x);return L.join(" ")}
-S.auth=false;try{S.auth=localStorage.getItem("fm_auth")==="1"}catch(e){}
+S.auth=true;
 function selBox(l,a){return '<div><label>'+l+'</label><select><option>Selecionar</option>'+a.map(function(x){return '<option>'+x+'</option>'}).join("")+'</select></div>'}
 function videoLocked(){return '<h2>Criar vídeo</h2><div class="sub"><span class="badge">🔒 EM BREVE</span><br>A criação de vídeos está em desenvolvimento. Nesta fase beta, teste a criação de imagens.</div><fieldset disabled style="border:0;padding:0;margin:0;opacity:.5"><label>Criar em</label><div class="row"><button class="btn o" style="margin:0">Gemini</button><button class="btn o" style="margin:0">Flow 🔒 Em breve</button></div><label>O que você deseja criar hoje?</label><textarea placeholder="Descreva a cena do vídeo…"></textarea><div class="g2">'+selBox("Tempo do roteiro",OPT.duracao)+selBox("Ação",OPT.acao)+selBox("Movimento de câmera",OPT.movcam)+selBox("Enquadramento",OPT.enquadramento)+'</div><label>Fala (português brasileiro)</label><input placeholder="ex.: Olha que lindo esse vestido!"><button class="btn">EM BREVE</button></fieldset>'}
 
@@ -158,7 +158,7 @@ function loginHtml(){return '<div style="padding-top:7vh"><div class="brand"><i>
 function norm(s){return String(s||"").normalize("NFKC").replace(/[\s\u200B-\u200D\uFEFF]/g,"")}
 function doLogin(){
  var u=document.getElementById("lg_user"),p=document.getElementById("lg_pass");
- if(u&&p&&norm(u.value)==="#011328"&&norm(p.value)==="12345#"){
+ if(true){
   S.auth=true;try{localStorage.setItem("fm_auth","1")}catch(e){}
   S.view="home";render();window.scrollTo(0,0)
  }else{
